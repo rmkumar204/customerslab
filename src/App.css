@@ -1,63 +1,25 @@
 .offcanvas{
-  width: 40% !important;;
+  width: 40% !important;
+}
+.header{
+  background-color: #39AEBC;
+  height: 8%;
+}
+.offcanvas {
+  z-index: 1050;
+}
+
+.offcanvas-body {
+  overflow-y: auto;
 }
 .offcanvas-header{
-  padding: 3% !important;
+  padding: 2.2% !important;
+  background-color: #39AEBC;
+  color: white;
 }
 .offcanvas-title{
   padding: 0.5% !important;
 }
-
-/* App.css */
-.App {
-  font-family: Arial, sans-serif;
-  padding: 20px;
-}
-
-button {
-  padding: 10px;
-  font-size: 16px;
-}
-
-.popup {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.popup-content {
-  background: white;
-  padding: 20px;
-  border-radius: 8px;
-  width: 400px;
-}
-
-.schema-dropdown {
-  margin-bottom: 15px;
-}
-
-.blue-box {
-  background-color: #e0f7fa;
-  padding: 10px;
-  border-radius: 4px;
-  margin-top: 10px;
-}
-
-input[type="text"] {
-  width: 100%;
-  padding: 8px;
-  margin-bottom: 10px;
-  font-size: 16px;
-}
-
-select {
-  width: 100%;
-  padding: 8px;
-  font-size: 16px;
+.saveSegment{
+  background-color: #41B494 !important;
 }

@@ -1,38 +1,49 @@
 import React from 'react';
-import { SchemaOption } from '../App';
+import { SchemaOption } from './types/Schema';
 
 interface BlueBoxProps {
-    selectedSchemas: string[];
-    availableSchemas: SchemaOption[]; // Expecting the availableSchemas prop here
+  selectedSchemas: string[];
+  setSelectedSchemas: React.Dispatch<React.SetStateAction<string[]>>;
+  schemaOptions: SchemaOption[];
 }
 
-const BlueBox: React.FC<BlueBoxProps> = ({ selectedSchemas, availableSchemas }) => {
-    // const handleChange = (event: ChangeEvent<HTMLSelectElement>) => {
-    //     console.log(event)
-    //     const selectedValue = event.target.value;
-    //     console.log(selectedValue); // Use the selected value here
-    //   };
-    const SchemaDropDowns = ({ schema }: { schema: string, selectedSchemas:string[] }) => {
-        // const filtered:string[]=selectedSchemas.filter((item:string)=>item !=schema);
-        return (
-            <select >
-                <option value={schema}>{schema}</option>
-                {availableSchemas.filter((SelSchema)=>!selectedSchemas.includes(SelSchema.value)).map((item, index) => (
-                    <option key={index} value={item.value}>{item.label}</option> 
-                ))}
-            </select>
-        );
-    };
+const BlueBox: React.FC<BlueBoxProps> = ({
+  selectedSchemas,
+  setSelectedSchemas,
+  schemaOptions
+}) => {
+  const handleSchemaChange = (index: number, value: string) => {
+    const updatedSchemas = [...selectedSchemas];
+    updatedSchemas[index] = value;
+    setSelectedSchemas([...new Set(updatedSchemas)]);
+  };
 
-    return (
-        <div className='mb-3'>
-            {selectedSchemas.map((schema, index) => (
-                <div className='m-2' key={index}>
-                    <SchemaDropDowns schema={schema} selectedSchemas={selectedSchemas}/>
-                </div>
-            ))}
-        </div>
+  const getAvailableOptions = (currentValue: string): SchemaOption[] => {
+    return schemaOptions.filter(
+      option =>
+        !selectedSchemas.includes(option.value) || option.value === currentValue
     );
+  };
+
+  return (
+    <div className={`blue-box w-100 mb-4 ${selectedSchemas.length > 0 ? 'border border-3 border-primary':''} p-3 `}>
+      {selectedSchemas.map((schema, index) => (
+        <div className='mb-2' key={index}>
+          <select
+            className='form-select'
+            value={schema}
+            onChange={e => handleSchemaChange(index, e.target.value)}
+          >
+            {getAvailableOptions(schema).map(option => (
+              <option key={option.value} value={option.value}>
+                {option.label}
+              </option>
+            ))}
+          </select>
+        </div>
+      ))}
+    </div>
+  );
 };
 
 export default BlueBox;
