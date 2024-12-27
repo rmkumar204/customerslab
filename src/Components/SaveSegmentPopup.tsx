@@ -35,11 +35,9 @@ const SaveSegmentPopup: React.FC<SaveSegmentPopupProps> = ({ onClose }) => {
   const validateFields = () => {
     const validationErrors: { segmentName?: string; schemas?: string } = {};
     if (!segmentName.trim()) {
-      console.log('chhhe')
       validationErrors.segmentName = 'Segment Name is required';
     }
     if (selectedSchemas.length === 0) {
-      console.log('lllll')
       validationErrors.schemas = 'At least one schema must be selected';
     }
     setErrors(validationErrors);
@@ -60,21 +58,12 @@ const SaveSegmentPopup: React.FC<SaveSegmentPopupProps> = ({ onClose }) => {
       }))
     }
     try{
-      const testData = {
-        segment_name: "Test Segment",
-        schemas: [
-          { label: "First Name", value: "first_name" },
-          { label: "Age", value: "age" }
-        ]
-      };
-      
-      fetch('https://webhook.site/76dbfb07-f2fb-496c-96f8-0857e70bfe0b', {
+      fetch('/api', {
         method: 'POST',
-        mode:'no-cors',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(testData)
+        body: JSON.stringify(formattedData)
       })
         .then(response => response.json())
         .then(data => console.log('Test Data Sent:', data))
@@ -82,11 +71,10 @@ const SaveSegmentPopup: React.FC<SaveSegmentPopupProps> = ({ onClose }) => {
       
 
     }catch(error){
-      console.error('Error:', error);
+      console.error('Errorddd:', error);
       alert('An error occurred while sending segment data');
     }
 
-    console.log('Saved Segment Data:', formattedData);
     onClose(); // Close offcanvas after save
   };
 
