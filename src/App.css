@@ -23,3 +23,10 @@
 .saveSegment{
   background-color: #41B494 !important;
 }
+.invalid-segment{
+  /* display: none; */
+    width: 100%;
+    margin-top: .25rem;
+    font-size: .875em;
+    color: var(--bs-form-invalid-color);
+}

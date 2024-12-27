@@ -10,14 +10,15 @@ interface BlueBoxProps {
 const BlueBox: React.FC<BlueBoxProps> = ({
   selectedSchemas,
   setSelectedSchemas,
-  schemaOptions
+  schemaOptions,
 }) => {
   const handleSchemaChange = (index: number, value: string) => {
+   
     const updatedSchemas = [...selectedSchemas];
     updatedSchemas[index] = value;
     setSelectedSchemas([...new Set(updatedSchemas)]);
   };
-
+ 
   const getAvailableOptions = (currentValue: string): SchemaOption[] => {
     return schemaOptions.filter(
       option =>
