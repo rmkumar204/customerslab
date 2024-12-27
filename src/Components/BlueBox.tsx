@@ -30,7 +30,7 @@ const BlueBox: React.FC<BlueBoxProps> = ({
     setSelectedSchemas(selectedSchemas.filter((item)=> item != schema))
   }
   return (
-    <div className={`blue-box w-100 mb-4 ${selectedSchemas.length > 0 ? 'border border-3 border-primary':''} p-3 `}>
+    <div className={`blue-box w-100 mb-4 ${selectedSchemas.length > 0 ? 'border border-2 border-primary-subtle':''} p-3 `}>
       {selectedSchemas.map((schema, index) => (
         <div className='mb-2 d-flex gap-2' key={index}>
           <select

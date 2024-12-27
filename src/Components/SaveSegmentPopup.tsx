@@ -57,24 +57,28 @@ const SaveSegmentPopup: React.FC<SaveSegmentPopupProps> = ({ onClose }) => {
         value: schema
       }))
     }
-    try{
-      fetch('/api', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(formattedData)
-      })
-        .then(response => response.json())
-        .then(data => console.log('Test Data Sent:', data))
-        .catch(error => console.error('Error sending test data:', error));
-      
-
-    }catch(error){
-      console.error('Errorddd:', error);
-      alert('An error occurred while sending segment data');
-    }
-
+    fetch('/api', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(formattedData)
+    })
+    .then(async (response) => {
+      const contentType = response.headers.get('Content-Type');
+      if (contentType && contentType.includes('application/json')) {
+        return response.json(); 
+      } else {
+        return response.text(); 
+      }
+    })
+    .then((data) => {
+      console.log('Response:', data);
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    });
+    
     onClose(); // Close offcanvas after save
   };
 
